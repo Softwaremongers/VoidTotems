@@ -27,6 +27,7 @@ public final class Main extends JavaPlugin {
         //load recipes
         new RecipesManager(this);
 
+        //to do: Add Config Manager
         //config setup
         if(getConfig().getString("totemworld") == null){
             getConfig().addDefault("totemworld", "world");
