@@ -33,7 +33,7 @@ To craft a **Void Totem**, arrange the following materials in a Crafting Table:
 1. **Equip:** Hold the Void Totem in your **Main Hand** or **Off-Hand**.
 2. **Fall:** If you fall below the void threshold (Y < 0), the totem will activate.
 3. **Trigger:** You will see the totem animation and hear the activation sound.
-4. **Escape:** You are instantly warped to the Overworld, saving your life and your inventory.
+4. **Escape:** You are instantly warped to the Overworld, saving your inventory from falling victim to the void.
 
 ---
 
