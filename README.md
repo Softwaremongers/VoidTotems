@@ -15,7 +15,7 @@
 To craft a **Void Totem**, arrange the following materials in a Crafting Table:
 
 | Slot | Item |
-| :--- | :--- | :--- |
+| :--- | :--- |
 | **F** | Feather |
 | **E** | Eye of Ender |
 | **D** | Diamond |
