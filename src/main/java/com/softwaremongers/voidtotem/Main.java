@@ -44,8 +44,6 @@ public final class Main extends JavaPlugin {
         getCommand("totem").setExecutor(new CommandManager()); //register command manager
         new Metrics(this, 11930); //bstats
 
-        //delete this comment later
-
         logger.info("Success!");
     }
 
