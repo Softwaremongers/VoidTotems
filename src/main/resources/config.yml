@@ -1,0 +1,18 @@
+# The world to teleport the player to when the totem activates
+totemworld: world
+
+# Have players that fall into the void teleport to specific coordinates.
+useSetLocation: false
+
+# X Y and Z coordinates for set teleport location
+spawnX: 0.5
+spawnY: 100
+spawnZ: 0.5
+spawnR: 0
+
+# Void Totem triggers anywhere in inventory when true.
+# Otherwise it behaves like a normal totem of undying and activates only when in the players hand.
+easymode: true
+
+# Language file to use.
+lang: en-US

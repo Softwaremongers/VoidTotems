@@ -5,6 +5,7 @@ import com.softwaremongers.voidtotem.commands.CommandManager;
 import com.softwaremongers.voidtotem.events.EventManager;
 import com.softwaremongers.voidtotem.recipes.RecipesManager;
 import com.softwaremongers.voidtotem.utils.UpdateChecker;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
@@ -14,9 +15,6 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-
-
         // Check For Updates
         new UpdateChecker(this, 93938).getVersion(version -> {
             if (!this.getDescription().getVersion().equalsIgnoreCase(version)) {
@@ -24,23 +22,16 @@ public final class Main extends JavaPlugin {
             }
         });
 
+        //load config
+        this.saveDefaultConfig();
+        FileConfiguration config = getConfig();
+
         //load recipes
         new RecipesManager(this);
 
-        //to do: Add Config Manager
-        //config setup, needs redone
-        if(getConfig().getString("totemworld") == null){
-            getConfig().addDefault("totemworld", "world");
-            getConfig().addDefault("useSetLocation", false);
-            getConfig().addDefault("spawnX", 0);
-            getConfig().addDefault("spawnY", 0);
-            getConfig().addDefault("spawnZ", 0);
-            getConfig().options().copyDefaults(true);
-            saveConfig();
-        }
-
         //startups
         this.getServer().getPluginManager().registerEvents(new EventManager(), this); //register event manager
+        //TODO: add alias "vt" to totem command
         getCommand("totem").setExecutor(new CommandManager()); //register command manager
         new Metrics(this, 11930); //bstats
 

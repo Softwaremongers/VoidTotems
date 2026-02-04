@@ -9,6 +9,8 @@ import java.util.List;
 
 public class ToggleSetLocationCommand extends SubCommand {
 
+    //TODO:COPIED FROM GIVETOTEMCOMMAND.JAVA, PLEASE FINISH
+
     @Override
     public String getName(){
         return "givetotem";
