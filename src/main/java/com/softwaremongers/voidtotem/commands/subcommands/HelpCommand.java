@@ -40,7 +40,6 @@ public class HelpCommand extends SubCommand {
             player.sendMessage("==============================");
             player.sendMessage("/totem givetotem");
             player.sendMessage("Give yourself a totem. :)");
-
         }
     }
 

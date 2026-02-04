@@ -33,7 +33,6 @@ public class GiveTotemCommand extends SubCommand {
                 if(args.length == 1){
                     //give player totem
                     player.getInventory().addItem(new ItemManager().VoidTotem());
-
                 }
             }else{
                 player.sendMessage(ChatColor.RED + "You do not have permission to do that.");

@@ -2,17 +2,19 @@ package com.softwaremongers.voidtotem.events;
 
 import com.softwaremongers.voidtotem.ItemManager;
 import com.softwaremongers.voidtotem.Main;
-import org.apache.commons.lang.NullArgumentException;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityResurrectEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
 
-public class VoidDamage {
+public class VoidResurrect {
 
     //TODO: read from lang file
     String teleMessage = "You have been returned to the mortal realm by the dark power of the Void Totem!";
@@ -30,7 +32,7 @@ public class VoidDamage {
     boolean useCoords = config.getBoolean("useSetLocation");
     String world = config.getString("totemworld");
 
-    public VoidDamage(EntityDamageEvent e){
+    public VoidResurrect(EntityResurrectEvent e){
         //set entity as player
         player = (Player) e.getEntity();
 

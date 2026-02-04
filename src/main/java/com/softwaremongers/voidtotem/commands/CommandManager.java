@@ -56,7 +56,7 @@ public class CommandManager implements TabExecutor {
                 subcommandArgs.add(getSubCommands().get(i).getName());
             }
             return subcommandArgs;
-        }else if(args.length == 2){
+        }else if(args.length >= 2){
             for(int i = 0; i < this.getSubCommands().size(); i++){
                 if(args[0].equalsIgnoreCase(this.getSubCommands().get(i).getName())){
                     return getSubCommands().get(i).getSubcommandArguments((Player) sender, args);

@@ -5,14 +5,22 @@ import com.softwaremongers.voidtotem.commands.SubCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
 public class SetWorldCommand extends SubCommand {
+
+    JavaPlugin plugin = Main.getPlugin(Main.class);
+    Logger logger = plugin.getLogger();
+    FileConfiguration config = plugin.getConfig();
 
     @Override
     public String getName(){
@@ -34,22 +42,41 @@ public class SetWorldCommand extends SubCommand {
         if(args.length > 1){
             if(player.hasPermission("voidtotem.setworld")){
                 if(args.length == 2){
+                    //TODO: TRY CATCH THIS
                     //setworld with dynamic coords
-                    Main.getPlugin(Main.class).getConfig().set("useSetLocation", false);
-                    Main.getPlugin(Main.class).getConfig().set("totemworld", args[1]);
+                    config.set("useSetLocation", false);
+                    config.set("totemworld", args[1]);
+                    //TODO: lang file
                     player.sendMessage(ChatColor.GREEN + "The world for totems to teleport players to has been set to: " + args[1]);
+                }else if(args.length == 3){
+                    //TODO: TRY CATCH THIS
+                    //setworld with "here" arg
+                    if(args[2].compareToIgnoreCase("here") == 0){
+                        config.set("useSetLocation", true);
+                        config.set("totemworld", args[1]);
+                        config.set("spawnX", player.getLocation().getX());
+                        config.set("spawnY", player.getLocation().getY());
+                        config.set("spawnZ", player.getLocation().getZ());
+                        config.set("spawnR", player.getLocation().getYaw());
+                        //TODO: lang file
+                        player.sendMessage(ChatColor.GREEN + "The world for totems to teleport players to has been set to: XXX");
+                    }
                 }else if(args.length == 5){
+                    //TODO: TRY CATCH THIS
                     //setworld with given coords
-                    Main.getPlugin(Main.class).getConfig().set("useSetLocation", true);
-                    Main.getPlugin(Main.class).getConfig().set("totemworld", args[1]);
+                    config.set("useSetLocation", true);
+                    config.set("totemworld", args[1]);
+                    config.set("spawnX", parseDouble(args[2]));
+                    config.set("spawnY", parseDouble(args[3]));
+                    config.set("spawnZ", parseDouble(args[4]));
+                    //TODO: lang file
                     player.sendMessage(ChatColor.GREEN + "The world for totems to teleport players to has been set to: " + args[1] + " at: " + args[2] + ", " + args[3] + ", " + args[4]);
-                    //do this better lol
-                    Main.getPlugin(Main.class).getConfig().set("spawnX", parseInt(args[2]));
-                    Main.getPlugin(Main.class).getConfig().set("spawnY", parseInt(args[3]));
-                    Main.getPlugin(Main.class).getConfig().set("spawnZ", parseInt(args[4]));
+                }else{
+                    //TODO: ERROR MESSAGE, NO CHANGES TO CONFIG
                 }
-                Main.getPlugin(Main.class).saveConfig();
+                plugin.saveConfig();
             }else{
+                //TODO: lang file
                 player.sendMessage(ChatColor.RED + "You do not have permission to do that.");
             }
         }
@@ -58,26 +85,32 @@ public class SetWorldCommand extends SubCommand {
     @Override
     public List<String> getSubcommandArguments(Player player, String[] args) {
 
+        //Autofill the args
         if(args.length == 2){
             List<String> worldNames = new ArrayList<>();
             World[] worlds = new World[Bukkit.getServer().getWorlds().size()];
             Bukkit.getServer().getWorlds().toArray(worlds);
-            //player.sendMessage("");
             for (int i = 0; i < worlds.length; i++){
                 worldNames.add(worlds[i].getName());
             }
             return  worldNames;
         }else if(args.length == 3){
-            List<String> worldNames = new ArrayList<>();
-            World[] worlds = new World[Bukkit.getServer().getWorlds().size()];
-            Bukkit.getServer().getWorlds().toArray(worlds);
-            //player.sendMessage("");
-            for (int i = 0; i < worlds.length; i++){
-                worldNames.add(worlds[i].getName());
-            }
-            return  worldNames;
+            List<String> coords = new ArrayList<>();
+            String x = String.valueOf(player.getLocation().getX());
+            coords.add(x);
+            coords.add("here");
+            return  coords;
+        }else if(args.length == 4){
+            List<String> coords = new ArrayList<>();
+            String y = String.valueOf(player.getLocation().getY());
+            coords.add(y);
+            return  coords;
+        }else if(args.length == 5){
+            List<String> coords = new ArrayList<>();
+            String z = String.valueOf(player.getLocation().getZ());
+            coords.add(z);
+            return  coords;
         }
-
 
         return null;
     }

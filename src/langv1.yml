@@ -1,0 +1,13 @@
+prefix: ' [Void Totems] '
+
+startup:
+  new_ver: |-
+    New version of void totems is available! New version: %newver%, Installed version: %curver%
+    Download from: %url%
+  updated: Plugin is up to date.
+  enable: Success!
+  disable: 'Disabling. Goodbye! :)'
+error:
+  no_world: Now world set. Transferring player to default world.
+help:
+  title: 'Void Totems Help:'
